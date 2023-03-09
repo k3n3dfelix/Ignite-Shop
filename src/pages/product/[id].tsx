@@ -16,8 +16,11 @@ interface ProductProps {
 }
 
 export default function Product({product}: ProductProps) {
-  const { query } = useRouter()
+  const { isFallback } = useRouter()
 
+  if(isFallback){
+    return <p>Loading...</p>
+  }
   return (
    <ProductContainer>
       <ImageContainer>
@@ -34,11 +37,14 @@ export default function Product({product}: ProductProps) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  //Buscar os produtos mais vendidos / mais acessados
+
   return {
     paths: [
       { params: {id: 'prod_NOlRizaHia1Gfk'}}
     ],
     fallback: true,
+    //fallback: 'blocking',
   }
 }
 
