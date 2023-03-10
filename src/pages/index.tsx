@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { HomeContainer, Product } from "../styles/pages/home";
 import { useKeenSlider } from "keen-slider/react";
-
+import Head from "next/head";
 import camiseta1 from "../assets/camisetas/1.svg";
 import camiseta2 from "../assets/camisetas/2.svg";
 import camiseta3 from "../assets/camisetas/3.svg";
@@ -29,7 +29,13 @@ export default function Home({ products }: HomeProps) {
     },
   });
   return (
+    <>
+    <Head>
+      <title>Home | Ignite Shop</title>
+    </Head>
+
     <HomeContainer ref={sliderRef} className="keen-slider">
+      
       {products.map((product) => {
         return (
           <Link   key={product.id}  href={`/product/${product.id}`} prefetch={false}>
@@ -52,6 +58,7 @@ export default function Home({ products }: HomeProps) {
         );
       })}
     </HomeContainer>
+    </>
   );
 }
 
